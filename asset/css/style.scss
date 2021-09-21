@@ -1,0 +1,105 @@
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin phone {
+    @media (max-width: #{$tablet-width}) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+        @content;
+    }
+}
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+* {
+    font-family: "Nunito", sans-serif;
+    padding: 0;
+    margin: 0;
+    color: rgb(39, 39, 39);
+}
+%box-shadow {
+    background: #fff;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), -2px -2px 4px rgba(0, 0, 0, 0.1);
+}
+%box-shadow-inset {
+    background: #fff;
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), inset -2px -2px 4px rgba(0, 0, 0, 0.1);
+}
+%box-shadow-border {
+    border: 2px solid #fff;
+    background: #fff;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), -2px -2px 4px rgba(0, 0, 0, 0.1), inset 2px 2px 4px rgba(0, 0, 0, 0.2),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.1);
+}
+input,
+textarea {
+    padding: 1rem;
+    margin: 0.5rem;
+    border: #fff;
+    outline: none;
+    border-radius: 5px;
+}
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    &:hover {
+        transform: scale(1.1);
+    }
+    &:active {
+        transform: scale(0.9);
+    }
+}
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper {
+    width: 70%;
+    @include tablet() {
+        width: 80%;
+    }
+    @include phone() {
+        width: 90%;
+    }
+    display: flex;
+    flex-direction: column;
+    .form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        @include phone {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+        input {
+            @extend %box-shadow-inset;
+        }
+    }
+    .content {
+        display: flex;
+        flex-direction: column;
+        input,
+        textarea {
+            @extend %box-shadow;
+            width: 80%;
+        }
+        textarea {
+            height: 5rem;
+        }
+        .content__item {
+            label {
+                width: 8rem;
+            }
+            display: flex;
+            align-items: center;
+            input,
+            textarea {
+                flex-grow: 1;
+            }
+        }
+    }
+}
